@@ -1,0 +1,17 @@
+<div class="row"><h1 class="col-md-12">MacBook</h1></div>
+<div class="row">
+
+  <div class="col-3" style="background: #cccccc; height: 500px"></div>
+  <div class="col-9">
+    <div class="row">
+      <div class="col-md-4" *ngFor="let good of goods">
+
+        <img *ngIf="good.cover != null; else elseBlock" src="http://127.0.0.1:9000{{good.cover.url}}"
+             style="width: 100%"/>
+        <ng-template #elseBlock>Else template</ng-template>
+
+        <div>{{good.name}}</div>
+      </div>
+    </div>
+  </div>
+</div>

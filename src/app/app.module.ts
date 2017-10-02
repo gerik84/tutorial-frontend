@@ -3,34 +3,56 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {AlertModule} from 'ngx-bootstrap';
-import {NavbarComponent} from './navbar.component';
-import {HeaderComponent} from './header.component';
-import {FooterComponent} from './footer.component';
+import {NavbarComponent} from './components/navbar/navbar.component';
+import {HeaderComponent} from './components/header/header.component';
+import {FooterComponent} from './components/footer/footer.component';
 import {AppRoutingModule} from './app-routing.module';
-import {CatalogComponent} from './catalog.component';
-import {IndexComponent} from './index.component';
+import {CatalogComponent} from './components/catalog/catalog.component';
+import {IndexComponent} from './components/index/index.component';
 import {GoodsService} from './services/goods.service';
-import {HttpModule} from '@angular/http';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from '@angular/common/http';
+import {PreloaderService} from './services/preloader.service';
+import {PostService} from './services/post-service';
+import {HttpService} from './services/http.service';
+
+import {HttpModule, RequestOptions, XHRBackend} from '@angular/http';
+import {PreloaderFull} from './components/preloader-full/preloader-full';
+import {PreloaderSmall} from './components/preloader-small/preloader-small';
+import {AuthorizationService} from "./services/authorization.service";
+
+export function httpServiceFactory(backend: XHRBackend, defaultOptions: RequestOptions, preloaderService: PreloaderService) {
+  return new HttpService(backend, defaultOptions, preloaderService);
+}
 
 @NgModule({
-    imports: [
-        HttpModule,
-        HttpClientModule,
-        BrowserModule,
-        AlertModule.forRoot(),
-        AppRoutingModule
-    ],
-    declarations: [
-        AppComponent,
-        NavbarComponent,
-        HeaderComponent,
-        FooterComponent,
-        CatalogComponent,
-        IndexComponent,
-    ],
-    providers: [GoodsService],
-    bootstrap: [AppComponent]
+  imports: [
+    HttpModule,
+    HttpClientModule,
+    BrowserModule,
+    AppRoutingModule
+  ],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    HeaderComponent,
+    FooterComponent,
+    CatalogComponent,
+    IndexComponent,
+    PreloaderFull,
+    PreloaderSmall
+  ],
+  providers: [
+    GoodsService,
+    PreloaderService,
+    AuthorizationService,
+    PostService,
+    {
+      provide: HttpService,
+      useFactory: httpServiceFactory,
+      deps: [XHRBackend, RequestOptions, PreloaderService]
+    }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

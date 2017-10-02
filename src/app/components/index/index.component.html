@@ -1,0 +1,24 @@
+<div class="row" style="height: 100%;">
+    <div class="col-md-8" style="background: green; height: 100%; float: left;">
+
+      <h2>Latest posts</h2>
+
+      <div *ngIf="posts">
+        <p *ngFor="let post of posts;">{{post.title}}</p>
+      </div>
+
+      <preloader-small></preloader-small>
+
+      <button class="courses__load-more"
+              (click)="getPosts('small')">
+        Load with small preloader
+      </button>
+
+      <button class="courses__load-more"
+              (click)="getPosts('full')">
+        Load with full preloader
+      </button>
+
+    </div>
+    <div class="col-md-4" style="background: gray; height: 100%; float: left;">ROW-CONTENT-RIGHT</div>
+</div>
