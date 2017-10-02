@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Goods} from './models/Goods';
-import {GoodsService} from "./services/goods.service";
 import {PreloadingStrategy, Route} from "@angular/router";
 import {Observable} from "rxjs/Observable";
+import {GoodsService} from "../services/goods.service";
+import {Goods} from "../models/Goods";
 
 @Component({
   selector: 'catalog',
