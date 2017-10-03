@@ -1,18 +1,23 @@
-import { Injectable } from '@angular/core';
-import { Http, ConnectionBackend, Request, RequestOptions, RequestOptionsArgs, Response, Headers } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Http, ConnectionBackend, Request, RequestOptions, RequestOptionsArgs, Response, Headers} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import 'rxjs/Rx';
 
-import { Config } from '../config';
+import {Config} from '../config';
 import {PreloaderService} from "./preloader.service";
 
 @Injectable()
 export class HttpService extends Http {
 
+  protected headers = new Headers({
+    'Content-Type': 'application/json',
+    'X-BLOG-APP-KEY': '139e747a-5a75-4d3f-a55c-9b9678f11290'
+  });
+
   constructor(backend: ConnectionBackend,
               defaultOptions: RequestOptions,
-              private preloaderService: PreloaderService) {
+              protected preloaderService: PreloaderService) {
     super(backend, defaultOptions);
   }
 
@@ -37,7 +42,9 @@ export class HttpService extends Http {
     this.requestInterceptor(preloaderType);
     let fullUrl = this.getFullUrl(url);
 
-    return super.get(fullUrl, this.requestOptions(options))
+    options = new RequestOptions({headers: this.headers});
+
+    return super.get(fullUrl, options)
       .catch(this.onCatch)
       .do((res: Response) => {
         this.onSubscribeSuccess(res);
@@ -58,23 +65,38 @@ export class HttpService extends Http {
    */
   post(url: string, body: any, options?: RequestOptionsArgs): Observable<any> {
     this.requestInterceptor();
+    options = new RequestOptions({headers: this.headers});
+
     let fullUrl = this.getFullUrl(url);
     console.error(fullUrl);
     console.error(body);
+    console.error(options);
 
-    return super.post(fullUrl, body, this.requestOptions(options))
-      .catch(this.onCatch)
-      .do((res: Response) => {
-        console.error(res);
-
-        this.onSubscribeSuccess(res);
-      }, (error: any) => {
-        this.onSubscribeError(error);
-      })
-      .finally(() => {
+    return super.post(fullUrl, body, options)
+      .map(resp => {
+        console.log('resp');
+        console.log(resp);
+        this.onSubscribeSuccess(resp);
         this.onFinally();
-      });
+        return resp.json();
+      })
+      .catch(this.handleError);
+
+    // return super.post(fullUrl, body, this.requestOptions(options))
+    //   .toPromise()
+    //   .then(resp => {
+    //     console.log(resp);
+    //     this.onSubscribeSuccess(resp);
+    //     this.onFinally();
+    //   })
+    //   .catch( error => this.handleError(error));
   }
+
+  protected handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
+  }
+
 
   /**
    * Performs a request with `put` http method.
@@ -158,7 +180,7 @@ export class HttpService extends Http {
    * Response interceptor.
    */
   private responseInterceptor(preloaderType = 'full'): void {
-      this.preloaderService.hidePreloader(preloaderType);
+    this.preloaderService.hidePreloader(preloaderType);
   }
 
   /**

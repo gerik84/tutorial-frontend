@@ -23,7 +23,7 @@ export class PreloaderService {
   }
 
   hidePreloader(preloaderType = 'full'): void {
-    // console.error("hide");
+    console.error("hide");
     if (preloaderType === 'full') {
       PreloaderService.fullLoadingCount--;
     } else if (preloaderType === 'small') {

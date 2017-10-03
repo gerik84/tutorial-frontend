@@ -1,17 +1,15 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
 import {Goods} from '../models/Goods';
-import {RestService} from './rest.service';
-import {HttpService} from './http.service';
+import {UserHttpService} from './user.http.service';
 
 
 @Injectable()
 export class GoodsService {
 
-  constructor(private http: HttpService) {
+  constructor(private http: UserHttpService) {
   }
 
   getCatalog(): Promise<Goods[]> {

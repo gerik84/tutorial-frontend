@@ -5,7 +5,8 @@ import {Config} from "../../config";
 
 @Component({
   selector: 'catalog',
-  templateUrl: './catalog.component.html'
+  templateUrl: './catalog.component.html',
+  styleUrls: ['./catalog.sass']
 })
 
 export class CatalogComponent implements OnInit {
@@ -23,7 +24,6 @@ export class CatalogComponent implements OnInit {
             count++;
             try {
               if (item.cover != null) {
-                console.log(item.cover);
               }
             } catch (ex) {
               console.error(item);

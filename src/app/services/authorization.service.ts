@@ -1,39 +1,36 @@
 import {Injectable} from '@angular/core';
-import {HttpService} from './http.service';
 import {Cookie} from 'ng2-cookies/ng2-cookies';
-import {Observable} from "rxjs/Observable";
+import {UserModel} from '../models/user.model';
+import {UserHttpService} from './user.http.service';
+import {HttpService} from "./http.service";
 
 @Injectable()
 export class AuthorizationService {
 
-  constructor(private http: HttpService) {
+  public user_session: string = null;
 
+  constructor(private http: HttpService) {
+    this.user_session = Cookie.get('user_session');
   }
 
   public signup() {
-    console.error("AAAAAAAAAAAA");
-    let headers = new Headers({
-      'Content-Type': 'application/json;charset=utf-8',
-      'X-API-KEY': '139e747a-5a75-4d3f-a55c-9b9678f11290'
-    });
-    const body = JSON.stringify([]);
+    let user = new UserModel();
+    user.name = 'name';
+    user.email = 'email';
 
-    this.http.post('/signup', body, headers)
-      .map((resp: Response) => {
-        console.error("Asda!sd");
+    const body = JSON.stringify(user);
 
-        let res = resp.json();
-        console.log(res);
-      })
-      .catch((error: any) => {
-        console.error("Asda!!!!sd");
+    if (this.user_session == null) {
+      this.http.post('/signup', body, null)
+        .subscribe(
+          resp => {
+            console.log(resp.accessToken);
+            Cookie.set('user_session', resp.accessToken);
+          },
+          error => console.error(error)
+        );
+    }
 
-        return Observable.throw(error);
-      });
-  }
-
-  public signInGuest() {
-    // this.http.postDa();
   }
 
 }

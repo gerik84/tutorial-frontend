@@ -19,8 +19,12 @@ import {HttpModule, RequestOptions, XHRBackend} from '@angular/http';
 import {PreloaderFull} from './components/preloader-full/preloader-full';
 import {PreloaderSmall} from './components/preloader-small/preloader-small';
 import {AuthorizationService} from "./services/authorization.service";
+import {UserHttpService} from "./services/user.http.service";
 
-export function httpServiceFactory(backend: XHRBackend, defaultOptions: RequestOptions, preloaderService: PreloaderService) {
+export function httpServiceFactory(backend: XHRBackend, defaultOptions: RequestOptions, preloaderService: PreloaderService, authService: AuthorizationService) {
+  return new UserHttpService(backend, defaultOptions, preloaderService, authService);
+}
+export function httpServiceFactory2(backend: XHRBackend, defaultOptions: RequestOptions, preloaderService: PreloaderService) {
   return new HttpService(backend, defaultOptions, preloaderService);
 }
 
@@ -48,8 +52,13 @@ export function httpServiceFactory(backend: XHRBackend, defaultOptions: RequestO
     PostService,
     {
       provide: HttpService,
-      useFactory: httpServiceFactory,
+      useFactory: httpServiceFactory2,
       deps: [XHRBackend, RequestOptions, PreloaderService]
+    },
+    {
+      provide: UserHttpService,
+      useFactory: httpServiceFactory,
+      deps: [XHRBackend, RequestOptions, PreloaderService, AuthorizationService]
     }
   ],
   bootstrap: [AppComponent]

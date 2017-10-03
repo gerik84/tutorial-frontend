@@ -11,15 +11,16 @@ export class AppComponent implements OnInit {
   title = 'app';
 
   constructor(private authorization: AuthorizationService) {
-    this.authorization.signup();
 
   }
 
   ngOnInit(): void {
-   /* const user_session_field = 'user_session';
-    let user_session = Cookie.get(user_session_field);
-    if (user_session != null) {
-      this.authorization.signInGuest();
-    }*/
+    this.authorization.signup();
+
+    /* const user_session_field = 'user_session';
+     let user_session = Cookie.get(user_session_field);
+     if (user_session != null) {
+       this.authorization.signInGuest();
+     }*/
   }
 }
