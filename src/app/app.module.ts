@@ -20,48 +20,50 @@ import {PreloaderFull} from './components/preloader-full/preloader-full';
 import {PreloaderSmall} from './components/preloader-small/preloader-small';
 import {AuthorizationService} from "./services/authorization.service";
 import {UserHttpService} from "./services/user.http.service";
+import {BreadcrumbComponent} from "./components/breadcrumb/breadcrumb.component";
 
 export function httpServiceFactory(backend: XHRBackend, defaultOptions: RequestOptions, preloaderService: PreloaderService, authService: AuthorizationService) {
-  return new UserHttpService(backend, defaultOptions, preloaderService, authService);
+    return new UserHttpService(backend, defaultOptions, preloaderService, authService);
 }
 export function httpServiceFactory2(backend: XHRBackend, defaultOptions: RequestOptions, preloaderService: PreloaderService) {
-  return new HttpService(backend, defaultOptions, preloaderService);
+    return new HttpService(backend, defaultOptions, preloaderService);
 }
 
 @NgModule({
-  imports: [
-    HttpModule,
-    HttpClientModule,
-    BrowserModule,
-    AppRoutingModule
-  ],
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    HeaderComponent,
-    FooterComponent,
-    CatalogComponent,
-    IndexComponent,
-    PreloaderFull,
-    PreloaderSmall
-  ],
-  providers: [
-    GoodsService,
-    PreloaderService,
-    AuthorizationService,
-    PostService,
-    {
-      provide: HttpService,
-      useFactory: httpServiceFactory2,
-      deps: [XHRBackend, RequestOptions, PreloaderService]
-    },
-    {
-      provide: UserHttpService,
-      useFactory: httpServiceFactory,
-      deps: [XHRBackend, RequestOptions, PreloaderService, AuthorizationService]
-    }
-  ],
-  bootstrap: [AppComponent]
+    imports: [
+        HttpModule,
+        HttpClientModule,
+        BrowserModule,
+        AppRoutingModule
+    ],
+    declarations: [
+        AppComponent,
+        NavbarComponent,
+        HeaderComponent,
+        FooterComponent,
+        CatalogComponent,
+        IndexComponent,
+        PreloaderFull,
+        PreloaderSmall,
+        BreadcrumbComponent
+    ],
+    providers: [
+        GoodsService,
+        PreloaderService,
+        AuthorizationService,
+        PostService,
+        {
+            provide: HttpService,
+            useFactory: httpServiceFactory2,
+            deps: [XHRBackend, RequestOptions, PreloaderService]
+        },
+        {
+            provide: UserHttpService,
+            useFactory: httpServiceFactory,
+            deps: [XHRBackend, RequestOptions, PreloaderService, AuthorizationService]
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

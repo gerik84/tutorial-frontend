@@ -6,8 +6,14 @@ import {CatalogComponent} from './components/catalog/catalog.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/', pathMatch: 'full'},
-  {path: 'catalog', component: CatalogComponent, data: {preload: true}},
-  {path: '', component: IndexComponent},
+  {path: 'catalog', component: CatalogComponent,  data: {
+    breadcrumb: "Sign In"
+  }},
+  {
+    path: '',
+    component: IndexComponent,
+
+  },
   // {
   //   path: 'feature-2',
   //   loadChildren: './feature-2/feature-2.module#Feature2Module',
