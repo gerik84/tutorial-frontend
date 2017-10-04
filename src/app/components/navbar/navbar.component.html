@@ -1,38 +1,48 @@
 <div *ngIf="cap" class="cap-true"></div>
 <div #myIdentifier class="row-fill {{fixClass}}">
     <div class="container">
-        <div class="row" style="display: block">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light row" style="padding-left: 0px; padding-right: 0px;">
+
+
                 <button (click)="openNav()" class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a  routerLink="/" class="navbar-brand" href="#">
-                    <img src="assets/images/logo.svg" style="width: 32px"/>
-                </a>
+
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a routerLink="/catalog" class="nav-link" href="#">Каталог<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" routerLink="feature-2">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Disabled</a>
-                        </li>
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Вы хотитет найти ..." aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Поиск</button>
-                        <div class="glyphicon glyphicon-glass">asd</div>
-                    </form>
+                    <div class="col-md-4">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a routerLink="/catalog" class="nav-link" href="#">Каталог<span
+                                        class="sr-only">(current)</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <form class="form-inline my-2 my-lg-0">
+                            <div class="cmp-search">
+                                <input class="form-control input-search" type="text" placeholder="найти ..."
+                                       aria-label="Search">
+                                <div class="btn-search">
+                                    <button type="submit"></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-4" style="font-size: 0.8rem">
+                        <div class="row">
+                            <div class="col-md-4">1</div>
+                            <div class="col-md-4">2</div>
+                            <div class="col-md-4" >
+                                    Корзина
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </div>
-    </div>
 
 
 </div>

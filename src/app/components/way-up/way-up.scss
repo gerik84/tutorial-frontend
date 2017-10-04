@@ -1,0 +1,27 @@
+$container: 89%;
+@media (min-width: 1200px) {
+  $container: 1140px;
+}
+
+@media (min-width: 992px) {
+  $container:960px;
+}
+
+@media (min-width: 768px) {
+  $container:720px;
+}
+
+@media (min-width: 576px) {
+  $container:540px;
+}
+
+@media screen and (min-width: 1200px) {
+  #way-up {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    background: red;
+    left: $container;
+    top: calc( 100% - 25px);
+  }
+}
