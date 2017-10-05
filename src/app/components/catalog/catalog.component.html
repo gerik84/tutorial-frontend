@@ -1,18 +1,44 @@
-<div class="row"><h1 class="col-md-12">MacBook</h1></div>
+<div class="row"><h1 class="col-md-12" style="margin-left: 3rem">MacBook</h1></div>
 <div class="row">
-  <div class="col-3" style="background: #cccccc; height: 500px"></div>
-  <div class="col-9">
-    <div class="row">
-      <div class="col-md-4 goods-item" *ngFor="let good of goods">
-        <img *ngIf="good.cover != null; else elseBlock" src="http://127.0.0.1:9000{{good.cover.url}}"
-             style="width: 100%"/>
-        <ng-template #elseBlock>Else template</ng-template>
-        <h2>{{good.name}}</h2>
+    <div class="col-3" style="height: 500px;">
 
-        <div class="row">
-          <button class="btn-primary align-bottom">Купить</button>
-        </div>
-      </div>
+        <div style="  box-shadow: 0 0 10px rgba(0,0,0,0.5); border-radius: .25rem; margin: 0 -.25rem .25rem .25rem ; width: 100%; height: 100%;"></div>
+
     </div>
-  </div>
+
+    <div class="col-9">
+        <div class="row">
+
+            <div class="col-md-4" *ngFor="let good of goods">
+
+                <div class="goods-item">
+
+                    <img class="goods-item-img" *ngIf="good.cover != null; else elseBlock"
+                         src="{{baseUrl}}{{good.cover.url}}"/>
+
+                    <ng-template #elseBlock>
+                        <img class="goods-item-img" src="assets/images/smartphone.svg"/>
+                    </ng-template>
+
+                    <h2 class="goods-item-title">{{good.name}}</h2>
+
+                    <div class="row goods-item-ctrl">
+                        <div class="col-4">
+                            <button class="btn btn-primary btn-buy">Купить</button>
+                        </div>
+                        <div class="col-1"></div>
+                        <div class="col-1"></div>
+                        <div class="col-1">
+                            <img class="goods-item-icon" src="assets/images/weight-balance.svg">
+                        </div>
+                        <div class="col-1">
+                            <img class="goods-item-icon" src="assets/images/star2.svg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </div>

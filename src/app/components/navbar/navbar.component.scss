@@ -55,3 +55,23 @@
 .gliphicon:hover  {
   background: red;
 }
+
+.nav-small-item {
+  line-height: 1rem;
+  display: table;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+
+  img {
+    width: 24px;
+    height: 24px;
+    text-align: right;
+  }
+  span {
+    vertical-align: middle;
+    padding: 0 0 0 .5rem;
+    margin: 0 .25rem;
+    }
+
+}
