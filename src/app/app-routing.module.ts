@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {IndexComponent} from './components/index/index.component';
 import {CatalogComponent} from './components/catalog/catalog.component';
+import {GoodsDetailComponent} from "./components/goods/goods-detail.component";
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
     component: IndexComponent,
 
   },
+  { path: 'goods/:id', component: GoodsDetailComponent },
   // {
   //   path: 'feature-2',
   //   loadChildren: './feature-2/feature-2.module#Feature2Module',

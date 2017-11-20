@@ -19,6 +19,7 @@ import {AuthorizationService} from "./services/authorization.service";
 import {UserHttpService} from "./services/user.http.service";
 import {BreadcrumbComponent} from "./components/breadcrumb/breadcrumb.component";
 import {WayUpComponent} from "./components/way-up/way-up.component";
+import {GoodsDetailComponent} from "./components/goods/goods-detail.component";
 
 export function httpServiceFactory(backend: XHRBackend, defaultOptions: RequestOptions, preloaderService: PreloaderService, authService: AuthorizationService) {
     return new UserHttpService(backend, defaultOptions, preloaderService, authService);
@@ -45,6 +46,7 @@ export function httpServiceFactory2(backend: XHRBackend, defaultOptions: Request
         PreloaderSmall,
         BreadcrumbComponent,
         WayUpComponent,
+        GoodsDetailComponent
     ],
     providers: [
         GoodsService,

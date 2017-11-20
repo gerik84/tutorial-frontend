@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Goods} from '../../models/Goods';
 import {GoodsService} from "../../services/goods.service";
 import {Config} from "../../config";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'catalog',
@@ -11,8 +12,11 @@ import {Config} from "../../config";
 
 export class CatalogComponent implements OnInit {
 
-    constructor(private goodService: GoodsService) {
+    router: Router;
+
+    constructor(private goodService: GoodsService, _router: Router) {
         this.baseUrl = Config.api;
+        this.router = _router;
     }
 
     goods: Goods[];
@@ -37,6 +41,11 @@ export class CatalogComponent implements OnInit {
             this.goods = goods;
             console.log(this.goods);
         });
+    }
+
+    click(event, item): boolean {
+        this.router.navigate(['/goods/' + item.id]);
+        return false;
     }
 
 }

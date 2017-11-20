@@ -11,7 +11,7 @@
 
             <div class="col-md-4" *ngFor="let good of goods">
 
-                <div class="goods-item">
+                <div class="goods-item" (click)="click($event, good)">
 
                     <img class="goods-item-img" *ngIf="good.cover != null; else elseBlock"
                          src="{{baseUrl}}{{good.cover.url}}"/>
@@ -20,7 +20,7 @@
                         <img class="goods-item-img" src="assets/images/smartphone.svg"/>
                     </ng-template>
 
-                    <h2 class="goods-item-title">{{good.name}}</h2>
+                    <h2 class="goods-item-title"><a routerLink="/goods/{{good.id}}">{{good.name}}</a></h2>
 
                     <div class="row goods-item-ctrl">
                         <div class="col-4">
